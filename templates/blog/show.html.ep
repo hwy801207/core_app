@@ -1,0 +1,16 @@
+% layout 'default';
+% title 'Show';
+
+
+<h4><%= $article->{title} %></h4>
+<p><%= $article->{content} %></p>
+
+% content_for 'sidebar' => begin
+  <ul>
+    <li>item1</li>
+    <li>item1</li>
+    <li>item1</li>
+    <li>item1</li>
+    <li>item1</li>
+  </ul>
+% end

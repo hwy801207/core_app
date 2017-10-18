@@ -1,0 +1,9 @@
+package CoreApp::Model::User;
+use SQL::Abstract::More;
+
+has 'pg';
+
+sub login {
+		my $($self, $username, $password) = @_;
+	
+}

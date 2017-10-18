@@ -1,0 +1,19 @@
+body{
+    margin: auto;
+    background: #CAC6C6
+}
+
+nav {
+    background: #3E9096;
+}
+
+.container {
+    margin: auto;
+}
+#content {
+    background: rgba(139, 120, 120, 0.71);
+}
+
+#sidebar {
+    background: rgba(101, 136, 130, 0.55);
+}
