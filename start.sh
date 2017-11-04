@@ -1,3 +1,3 @@
 #!/bin/bash
 
-morbo script/core_app daemon -l http://0.0.0.0:8899
+morbo -v -w ./ script/core_app daemon -l http://0.0.0.0:8899

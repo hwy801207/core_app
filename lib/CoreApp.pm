@@ -16,6 +16,11 @@ sub startup {
   # Router
   my $r = $self->routes;
 
+  # $self->helper('cache_control.no_caching' => sub {
+  # 		  my $c = shift->c;
+  # 		  $c->res->headers->cache_control('private, max-age=0, no-cache');
+  # 	  });
+
   $self->helper(pg => sub {
 		  state $pg = Mojo::Pg->new(shift->config('pg'));
 		  $pg->abstract(SQL::Abstract::More->new);
@@ -42,7 +47,8 @@ sub startup {
 
   $r->get('/')->to('blog#index');
   $r->get('/data')->to('blog#json');
-  $r->get('/blog/:id')->to('blog#show');
+  $r->get('/blog/:id' => [id => qr/\d+/])->to('blog#show');
+  $r->any('/blog/new/')->to('blog#add') #for get or post 
 }
 
 1;

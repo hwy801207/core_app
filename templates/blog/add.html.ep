@@ -1,0 +1,24 @@
+% layout 'default';
+%= form_for '/blog/new' => (method => 'POST') =>(class=>'form') => begin
+    <div class="form_group"
+    %= label_for title => '标题'
+    %= text_field 'title'
+    </div>
+    <div class="form_group"
+    %= label_for tags => "标签"
+    % for my $tag (@{$tags}) {
+    <label>
+    %= check_box 'tags' => $tag->{id}
+    %= $tag->{name}
+    </label>
+    %}
+    </div>
+    <div class="form_group"
+    %= label_for content => '内容'
+    %= text_field 'content'
+    </div>
+    <div class="form_group">
+        %= submit_button "提交", id=>"new_blog"
+    </div>
+% end
+%= include 'blog/side'

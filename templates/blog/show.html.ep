@@ -1,16 +1,15 @@
 % layout 'default';
 % title 'Show';
 
-
+<div class="row">
+	<div class="col-lg-12 content"
 <h4><%= $article->{title} %></h4>
+	% for my $tag (@{$article->{tags}}) {
+        <li><%= $tag->{name} %></li>
+	%}
 <p><%= $article->{content} %></p>
+</div>
+</div>
 
-% content_for 'sidebar' => begin
-  <ul>
-    <li>item1</li>
-    <li>item1</li>
-    <li>item1</li>
-    <li>item1</li>
-    <li>item1</li>
-  </ul>
-% end
+
+%= include 'blog/side'
