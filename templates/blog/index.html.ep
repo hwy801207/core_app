@@ -10,9 +10,16 @@
         <a href="#"><%= $tag->{'name'} %></a>
         %}
     </div>
-    <p><%= $article->{content} %></p>
+    # 截断内容
+    % use Text::Truncate;
+    <p><%= truncstr($article->{content}, 30) %></p>
     <a href="/blog/<%= $article->{id} %>">Read More</a>
 	</div>
 </div>
 %}
+% if ($page > 1) {
+    <a href="/blog/p/<%= $page-1 %>">上一页</a>
+%}
+
+<a href="/blog/n/<%= $page+1 %>">下一页</a>
 %= include 'blog/side'

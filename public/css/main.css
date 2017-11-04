@@ -24,4 +24,5 @@ nav {
 	margin-top: 10px;
     background: rgba(101, 136, 130, 0.55);
 	margin-left: 5px;
+	box-shadow: 3px 3px 3px;
 }

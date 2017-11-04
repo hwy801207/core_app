@@ -7,11 +7,12 @@ has 'pg';
 has 'sql' => sub { SQL::Abstract::More->new(); };
 sub index {
     my $self = shift;
+    my $page = shift if @_;
     my $articles = $self->pg->db->select(
         -from => 'blog_article',
         -columns => ['id', 'title', 'content'],
         -limit => 20,
-        -offset => 0,
+        -offset => ($page-1)*20,
         )->hashes->to_array;
     for my $article (@$articles) {
         my $tags = $self->tags_by_articele_id($article->{'id'});
@@ -56,6 +57,7 @@ sub tags_by_articele_id {
     return \@tags;
 }
 
+# 增加一篇 article
 sub add {
     my ($self, $data) = @_;
     my $now = DateTime->now->strftime(join(" ", "%F", "%T"));
@@ -72,13 +74,26 @@ sub add {
         -returning => 'id'
     )->hash;
 
-    $self->pg->db->insert(
+    return unless exists $data->{tags};
+
+    if (ref $data->{tags} eq 'ARRAY') {
+        $self->pg->db->insert(
         -into       => 'article_tags',
         -values     => {'article_id'     => $article->{id},
                         'tag_id'         => $_,
                        }
-    ) for @{$data->{tags}};
+        ) for @{$data->{tags}};
+        }
+        elsif (ref $data->{tags} eq 'SCALA') {
+            $self->pg->db->insert(
+                -into       => 'article_tags',
+                -values     => {'article_id'     => $article->{id},
+                                'tag_id'         => $data->{tags},
+                                }
+            )
+        }
 }
+
 1;
 
 

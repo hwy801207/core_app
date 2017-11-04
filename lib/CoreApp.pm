@@ -48,7 +48,8 @@ sub startup {
   $r->get('/')->to('blog#index');
   $r->get('/data')->to('blog#json');
   $r->get('/blog/:id' => [id => qr/\d+/])->to('blog#show');
-  $r->any('/blog/new/')->to('blog#add') #for get or post 
+  $r->any('/blog/new/')->to('blog#add'); #for get or post 
+  $r->get('/blog/:dir/:page' => [page => qr/\d+/])->to('blog#index');
 }
 
 1;

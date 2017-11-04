@@ -3,9 +3,14 @@ use Mojo::Base 'Mojolicious::Controller';
 
 sub index {
 	my $c = shift;
-	my $articles = $c->blog->index;
+	my $page = $c->stash('page') ? $c->stash('page') : 1; 
+	if ($c->stash('dir') eq 'p') {
+		$page -= 1;
+		$page = 1 if $page == 0;
+	}
+	my $articles = $c->blog->index($page);
 	my $tags = $c->blog->tags_all;
-	$c->render( articles => $articles, tags => $tags);
+	$c->render( articles => $articles, tags => $tags, page => $page);
 }
 
 
@@ -29,7 +34,7 @@ sub add {
 	elsif ($c->req->method eq 'POST') {
 		my $data = $c->req->params->to_hash;
 		$c->blog->add($data);
-		$c->render(json => {"post"=> "ok"})
+		$c->redirect_to("/")
 	}
 	else {
 		$c->render(json => {"方法"=> "被禁止"})
