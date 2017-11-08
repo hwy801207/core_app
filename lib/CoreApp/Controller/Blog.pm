@@ -26,17 +26,18 @@ sub json {
 sub add {
 	my $c = shift;
 	# 是否登录
-	if (not $c->session('user')) {
+	if (not $c->session->{'user'}) {
 		return $c->redirect_to("/login");
 	}
-	
+	my $user = $c->user->load_user($c->session->{'user'});
 	if ($c->req->method eq 'GET') {
 		return $c->render();
 	}
 	elsif ($c->req->method eq 'POST') {
 		my $data = $c->req->params->to_hash;
+		$data->{user} = $user->{id};
 		$c->blog->add($data);
-		$c->redirect_to("/")
+		$c->redirect_to("/");
 	}
 	else {
 		$c->render(json => {"方法"=> "被禁止"})

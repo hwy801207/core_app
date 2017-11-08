@@ -9,13 +9,14 @@ sub login {
 sub auth {
     my $c = shift;
     my $data = $c->req->params->to_hash;
-    if ($c->user->auth($data->{username}, $data->{password})) {
+    if ($c->user->authenticate($data->{username}, $data->{password})) {
         # session 会话
         $c->session(user => $data->{username});
         return $c->redirect_to("/");
     }
     else {
-        return $c->redirect_to("/", message => "登录失败，用户名不存在或者密码不对")
+        $c->flash(message => "登录失败，用户名不存在或者密码不对");
+        return $c->redirect_to("/login",)
     }
 }
 

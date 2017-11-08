@@ -3,7 +3,7 @@ use Mojo::Base -base;
 use SQL::Abstract::More;
 
 has 'pg';
-
+# has 'log' => sub { state $log = Mojo::Log->new};
 sub load_user {
 	my ($self, $username) = @_;
     my $result = $self->pg->db->select( 
@@ -18,7 +18,6 @@ sub authenticate {
 	my($self, $username, $password) = @_;
 
 	my $user = $self->load_user($username);
-	
 	if ($user->{password} eq $password) {
 		return $user;
 	}

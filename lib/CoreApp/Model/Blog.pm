@@ -69,9 +69,9 @@ sub add {
                     'created_time' => "$now",
                     'is_allow_comment' => 1,
                     'is_delete'        => 0,
-                    'user_id'          => 5,
+                    'user_id'          => $data->{'user'},
                     },
-        -returning => 'id'
+        -returning => 'id',
     )->hash;
 
     return unless exists $data->{tags};

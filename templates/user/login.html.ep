@@ -1,6 +1,8 @@
 % layout 'default';
 % title '用户登录';
-%= form_for '/blog/new' => (method => 'POST') =>(class=>'form') => begin
+%= flash 'message'
+
+%= form_for '/auth' => (method => 'POST') =>(class=>'form') => begin
     <div class="form_group"
     %= label_for title => "名称"
     %= text_field 'username'
