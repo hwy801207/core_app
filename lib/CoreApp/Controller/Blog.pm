@@ -9,16 +9,14 @@ sub index {
 		$page = 1 if $page == 0;
 	}
 	my $articles = $c->blog->index($page);
-	my $tags = $c->blog->tags_all;
-	$c->render( articles => $articles, tags => $tags, page => $page);
+	$c->render( articles => $articles, page => $page);
 }
 
 
 sub show {
 	my $c = shift;
 	my $article = $c->blog->get_by_id($c->stash('id'));
-	my $tags = $c->blog->tags_all;
-	$c->render(article => $article, tags=>$tags);
+	$c->render(article => $article);
 }
 sub json {
 	my $c = shift;
@@ -27,9 +25,13 @@ sub json {
 
 sub add {
 	my $c = shift;
-	my $tags = $c->blog->tags_all;
+	# 是否登录
+	if (not $c->session('user')) {
+		return $c->redirect_to("/login");
+	}
+	
 	if ($c->req->method eq 'GET') {
-		$c->render(tags=>$tags);
+		return $c->render();
 	}
 	elsif ($c->req->method eq 'POST') {
 		my $data = $c->req->params->to_hash;

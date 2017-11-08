@@ -1,9 +1,8 @@
 % content_for 'sidebar' => begin
+
 <ul>
-    % if ($tags) {
-     % for my $tag (@{$tags}) {
-        <li><%= $tag->{name} %> <%= $tag->{count} %></li>
-    %}
+    % for my $tag (tags->each) {
+        <li> <%= $tag->{name} %> <%= $tag->{count} %></li>
     %}
 </ul>
 % end

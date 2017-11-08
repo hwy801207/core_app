@@ -29,7 +29,15 @@ sub startup {
   $self->helper(blog => sub {
 		  state $blog = CoreApp::Model::Blog->new(pg => shift->pg);
 	  });
-
+  
+  $self->helper(tags => sub {
+    state $tags = shift->pg->db->select(
+        -from => [ 'blog_tag', 'article_tags'],
+        -columns => [qw/blog_tag.id blog_tag.name COUNT(article_tags.id)/],
+        -where   => "blog_tag.id = article_tags.tag_id", 
+        -group_by => ['blog_tag.name', 'blog_tag.id'],
+      )->hashes;
+  });
   $self->helper(user => sub {
 		  state $user = CoreApp::Model::User->new(pg => shift->pg);
 	  });
@@ -50,6 +58,10 @@ sub startup {
   $r->get('/blog/:id' => [id => qr/\d+/])->to('blog#show');
   $r->any('/blog/new/')->to('blog#add'); #for get or post 
   $r->get('/blog/:dir/:page' => [page => qr/\d+/])->to('blog#index');
+  $r->get('/login')->to('user#login');
+  $r->post('/register')->to('user#register');
+  $r->post('/auth')->to('user#auth');
+  $r->get('/logout')->to('user#logout');
 }
 
 1;

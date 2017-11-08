@@ -1,0 +1,16 @@
+% layout 'default';
+% title '用户登录';
+%= form_for '/blog/new' => (method => 'POST') =>(class=>'form') => begin
+    <div class="form_group"
+    %= label_for title => "名称"
+    %= text_field 'username'
+    </div>
+    <div class="form_group"
+    %= label_for tags => "密码"
+    %= password_field 'password'
+    </div>
+    <div class="form_group">
+        %= submit_button "提交", id=>"new_user"
+    </div>
+% end
+%= include 'blog/side'

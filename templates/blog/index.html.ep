@@ -10,7 +10,6 @@
         <a href="#"><%= $tag->{'name'} %></a>
         %}
     </div>
-    # 截断内容
     % use Text::Truncate;
     <p><%= truncstr($article->{content}, 30) %></p>
     <a href="/blog/<%= $article->{id} %>">Read More</a>
