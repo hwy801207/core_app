@@ -1,7 +1,6 @@
 % layout 'default';
 % title '用户登录';
 %= flash 'message'
-
 %= form_for '/auth' => (method => 'POST') =>(class=>'form') => begin
     <div class="form_group"
     %= label_for title => "名称"

@@ -14,7 +14,7 @@ sub load_user {
 	return $result;
 }
 
-sub authenticate {
+sub auth {
 	my($self, $username, $password) = @_;
 
 	my $user = $self->load_user($username);

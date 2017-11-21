@@ -5,4 +5,9 @@
         <li> <%= $tag->{name} %> <%= $tag->{count} %></li>
     %}
 </ul>
+<ul>
+    % for my $post (top10post->each) {
+        <li> <%= $post->{title} %> </li>
+    %}
+</ul>
 % end
