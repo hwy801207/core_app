@@ -10,7 +10,8 @@ sub index {
     my $page = shift if @_;
     my $articles = $self->pg->db->select(
         -from => 'blog_article',
-        -columns => ['id', 'title', 'content'],
+        # -columns => ['id', 'title', 'content'],
+        -order_by => '-created_time',
         -limit => 20,
         -offset => ($page-1)*20,
         )->hashes->to_array;

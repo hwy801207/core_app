@@ -15,25 +15,43 @@
   <body>
     <div class="container">
     <div class="row">
-    <nav class="nav col-lg-12">
+    <div class="col-lg-12">
+    <nav class="nav">
       <h1>导航部分</h1>
+      <%= content 'header' %>
     </nav>
     </div>
-      <div class="row">
+    </div>
+    <div class="row">
         <div class="col-lg-9">
           <%= content %>
         </div>
         <div class="col-lg-3">
-          <div class="row">
             <div class="col-lg-12" id="sidebar">
             <%= content 'sidebar' %>
             </div>
-          </div>
         </div>
-      </div>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/ck5/ckeditor.js"></script>
+    <script>
+    ClassicEditor
+    .create( document.querySelector( '#editor' ), {
+        toolbar: [ 'headings', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { modelElement: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { modelElement: 'heading1', viewElement: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                { modelElement: 'heading2', viewElement: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+            ]
+        },
+        entities: false
+    } )
+    .catch( error => {
+        console.log( error );
+    } );
+    </script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/bootstrap/js/bootstrap.min.js"></script>
   </body>

@@ -16,7 +16,7 @@
     </div>
     <div class="form_group"
     %= label_for content => '内容'
-    %= text_field 'content'
+    %= text_area 'content', id=>"editor" , cols=>30, rows=>40
     </div>
     <div class="form_group">
         %= submit_button "提交", id=>"new_blog"

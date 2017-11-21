@@ -70,5 +70,13 @@ article int references blog_article(id)
 $r->get('/blog/:id' => [ id => qr/\d+/])->to('blog#show');
 通过正则表达式限制id只能是数字的，不能是字符串的形式
 
+6 增加http2的支持
+5 增加https的支持
+3 调整首页布局增加功能（ 登陆，退出）
+2 编辑器调整，增加ckeditor 与 markdown的支持
+1 调整分类功能（日期归档，最新top10， 最新回复功能）
+4 是否实验后台功能
+
+7 comments powered by Disqus
 
 
