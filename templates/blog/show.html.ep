@@ -1,13 +1,19 @@
 % layout 'default';
 % title 'Show';
 
-	<div class="col-lg-12 content"
-<h4><%= $article->{title} %></h4>
+	<div class="col-lg-12 content">
+	<h4><%= $article->{title} %></h4>
 	% for my $tag (@{$article->{tags}}) {
         <li><%= $tag->{name} %></li>
 	%}
 	<p><%== $article->{content} %></p>
+	</div>
+
+<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3); margin-top: 20px;" width="100%" color=#987cb9 SIZE=6>
+<div>
+注释
 </div>
+
 
 
 %= include 'blog/side'
