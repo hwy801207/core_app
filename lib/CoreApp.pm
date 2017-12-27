@@ -29,8 +29,7 @@ sub startup {
   $self->helper(blog => sub {
 		  state $blog = CoreApp::Model::Blog->new(pg => shift->pg);
 	  });
-
-# 标签  
+ # tags 分类
   $self->helper(tags => sub {
     state $tags = shift->pg->db->select(
         -from => [ 'blog_tag', 'article_tags'],
@@ -50,12 +49,16 @@ sub startup {
   });
 
 # 最新回复
+$self->helper(new10post => sub {
+  state $new10post = shift->pg->db->select(
+    -from => 'blog_article',
+    -order_by => '-created_time', 
+    -limit => 10,
+  )->hashes;
+});
 
 
-
-
-
-
+# 最新回复10
   $self->helper(user => sub {
 		  state $user = CoreApp::Model::User->new(pg => shift->pg);
 	  });
@@ -76,6 +79,8 @@ sub startup {
   $r->get('/blog/:id' => [id => qr/\d+/])->to('blog#show');
   $r->any('/blog/new/')->to('blog#add'); #for get or post 
   $r->get('/blog/:dir/:page' => [page => qr/\d+/])->to('blog#index');
+
+
   $r->get('/login')->to('user#login');
   $r->post('/register')->to('user#register');
   $r->post('/auth')->to('user#auth');

@@ -3,8 +3,9 @@ body{
     background: #CAC6C6
 }
 
-nav {
+.nav {
     background: #3E9096;
+	box-shadow: 3px 3px 3px;
 }
 
 .container {
@@ -23,6 +24,5 @@ nav {
 #sidebar {
 	margin-top: 10px;
     background: rgba(101, 136, 130, 0.55);
-	margin-left: 5px;
 	box-shadow: 3px 3px 3px;
 }
