@@ -51,3 +51,20 @@ sub statistics {
         return { error => $!};
     }
 }
+
+
+sub remove  {
+    my ($self, $id) = @_;
+
+    my $sql = "DELETE FROM blog_comment where id=?";
+
+    my $result = eval {
+        $self->pg->db->query($sql, $id)->rows;
+    };
+
+    if (defined $result) {
+        return { success => $result};
+    } else {
+        return { error => $!};
+    }
+}
