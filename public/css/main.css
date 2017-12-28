@@ -1,3 +1,6 @@
+* {
+	box-sizing: border-box;
+}
 body{
     margin: auto;
     background: #CAC6C6
@@ -17,12 +20,14 @@ body{
 	box-shadow 3px 3px 3px;
 	-moz-box-shadow 3px 3px 3px;
 	-webkit-box-shadow 3px 3px 3px;
-	border: 1px solid;
-	border-radius:2px;
+	border: 2px solid;
+	border-radius:5px;
 }
 
 #sidebar {
 	margin-top: 10px;
     background: rgba(101, 136, 130, 0.55);
 	box-shadow: 3px 3px 3px;
+	border: 2px solid;
+	border-radius:5px;
 }
