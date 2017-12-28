@@ -1,17 +1,19 @@
 % layout 'default';
 % title '用户登录';
+<div id="login">
 %= flash 'message'
 %= form_for '/auth' => (method => 'POST') =>(class=>'form') => begin
     <div class="form_group"
     %= label_for title => "名称"
-    %= text_field 'username'
+    %= text_field 'username', class=> "form-control"
     </div>
     <div class="form_group"
     %= label_for tags => "密码"
-    %= password_field 'password'
+    %= password_field 'password', class=> "form-control"
     </div>
     <div class="form_group">
-        %= submit_button "提交", id=>"new_user"
+        %= submit_button "提交", id=>"new_user", class=>"form-control"
     </div>
 % end
+</div>
 %= include 'blog/side'

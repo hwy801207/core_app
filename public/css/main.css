@@ -7,27 +7,40 @@ body{
 }
 
 .nav {
-    background: #3E9096;
 	box-shadow: 3px 3px 3px;
 }
 
 .container {
     margin: auto;
 }
+
 .content {
 	margin-top: 10px;
-    background: rgba(139, 120, 120, 0.71);
-	box-shadow 3px 3px 3px;
-	-moz-box-shadow 3px 3px 3px;
-	-webkit-box-shadow 3px 3px 3px;
+	box-shadow: 3px 3px 3px;
+	-moz-box-shadow: 3px 3px 3px;
+	-webkit-box-shadow: 3px 3px 3px;
 	border: 2px solid;
-	border-radius:5px;
+	border-radius: 5px;
 }
 
 #sidebar {
 	margin-top: 10px;
-    background: rgba(101, 136, 130, 0.55);
 	box-shadow: 3px 3px 3px;
 	border: 2px solid;
 	border-radius:5px;
+}
+
+#login {
+	margin-top: 10px;
+}
+#newblog {
+	margin-top: 10px;
+	border: 2px solid;
+	border-radius:5px;
+}
+
+form {
+	margin: auto; 
+	width: 250px;
+	margin-bottom: 10px;
 }
