@@ -21,14 +21,27 @@ sub startup {
   # 		  $c->res->headers->cache_control('private, max-age=0, no-cache');
   # 	  });
 
+  # 初始化db连接
   $self->helper(pg => sub {
 		  state $pg = Mojo::Pg->new(shift->config('pg'));
 		  $pg->abstract(SQL::Abstract::More->new);
 	  });
 
+  # 初始化 blog 句柄
   $self->helper(blog => sub {
 		  state $blog = CoreApp::Model::Blog->new(pg => shift->pg);
 	  });
+
+  
+  # 初始化 user 句柄
+  $self->helper(user => sub {
+		  state $user = CoreApp::Model::User->new(pg => shift->pg);
+	});
+
+  $self->helper(comment => sub {
+    state $comment = CoreApp::Model::Comment->new(pg => shift->pg);
+  });
+
  # tags 分类
   $self->helper(tags => sub {
     state $tags = shift->pg->db->select(
@@ -59,9 +72,6 @@ $self->helper(new10post => sub {
 
 
 # 最新回复10
-  $self->helper(user => sub {
-		  state $user = CoreApp::Model::User->new(pg => shift->pg);
-	  });
 
   $self->helper(current => sub {
 		  my $self = shift;
